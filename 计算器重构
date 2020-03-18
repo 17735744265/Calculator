@@ -1,0 +1,109 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Test1
+{
+    public class Operator
+    {
+        private string _x1;
+        private string _x2;
+
+        public string A { get => _x1; set => _x1 = value; }
+        public string B { get => _x2; set => _x2 = value; }
+
+     
+        public virtual String Compute()
+        {
+            String val = null;
+            return val;
+        }
+    }
+    
+    class ADD : Operator
+    {
+        public override String Compute()
+        {
+            
+            String val = A + B;
+            return val;
+        }
+    }
+
+    class SUB : Operator
+    {
+        public override String Compute()
+        {
+           
+            String C=A.Remove(A.Length-B.Length);
+            return C;
+        }
+    }
+
+
+    class Product
+
+    {
+        float a, b;
+        public float A { get => a; set => a = value; }
+        public float B { get => b; set => b = value; }
+        public bool Equals(float a, float b)
+        {
+            if (a == b)
+
+            {
+                return true;
+            }
+
+            else
+
+                return false;
+        }
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            //计算器客户端
+            string x1,x2,x="";
+            char op = '+';
+            //用户输入
+            Console.Write("Please input an operand:");
+            x1 = Convert.ToString(Console.ReadLine());
+            Console.Write("Please input the operator(+,-,*,/):");
+            op = Convert.ToChar(Console.ReadLine());
+            Console.Write("Please input another operand:");
+            x2 = Convert.ToString(Console.ReadLine());
+
+            //创建对象
+            Operator obj = null;
+            switch (op)
+            {
+                case '+':
+                    obj = new ADD();
+                    break;
+                case '-':
+                    obj = new SUB();
+                    break;
+
+
+                default:
+                    break;
+            }
+            //使用对象
+            if (obj != null)
+            {
+                obj.A = x1;
+                obj.B = x2;
+                x = obj.Compute();
+
+            }
+
+            //输出结果
+            Console.WriteLine("The result is {0}", x);
+            
+        }
+    }
+}
